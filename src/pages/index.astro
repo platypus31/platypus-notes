@@ -41,6 +41,10 @@ function topicInfo(t: string) {
         </p>
       </section>
 
+      <section class="search" data-pagefind-ignore>
+        <div id="search"></div>
+      </section>
+
       <section class="topics">
         <h2 class="list-title">主題入口</h2>
         <div class="topic-grid">
@@ -78,6 +82,10 @@ function topicInfo(t: string) {
       <section class="hero">
         <h1>{currentTopic!.emoji} {currentTopic!.name}</h1>
         <p class="lede">{currentTopic!.desc}</p>
+      </section>
+
+      <section class="search" data-pagefind-ignore>
+        <div id="search"></div>
       </section>
 
       <section class="topic-all">
@@ -144,5 +152,66 @@ function topicInfo(t: string) {
       font-size: 0.75rem; padding: 0.1rem 0.45rem;
       border: 1px solid var(--border); border-radius: 3px; color: var(--fg-muted);
     }
+    /* Pagefind 搜尋 UI 深色主題覆蓋 */
+    .search { margin: 0 0 2.5rem; }
+    :global(.pagefind-ui) {
+      --pagefind-ui-scale: 0.9;
+      --pagefind-ui-primary: var(--fg);
+      --pagefind-ui-text: var(--fg);
+      --pagefind-ui-background: var(--bg-elev);
+      --pagefind-ui-border: var(--border);
+      --pagefind-ui-tag: var(--bg-elev);
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-border-radius: 6px;
+      --pagefind-ui-image-border-radius: 4px;
+      --pagefind-ui-image-box-ratio: 3 / 2;
+      --pagefind-ui-font: inherit;
+    }
+    :global(.pagefind-ui__search-input) {
+      background: var(--bg-elev) !important;
+      color: var(--fg) !important;
+    }
+    :global(.pagefind-ui__result) {
+      border-top: 1px solid var(--border) !important;
+    }
+    :global(.pagefind-ui__result-title a) {
+      color: var(--fg) !important;
+    }
+    :global(.pagefind-ui__result-excerpt) {
+      color: var(--fg-muted) !important;
+    }
+    :global(.pagefind-ui mark) {
+      background: var(--accent) !important;
+      color: var(--bg) !important;
+      padding: 0 0.2em;
+      border-radius: 2px;
+    }
   </style>
+
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof PagefindUI === 'undefined') return;
+      new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false,
+        excerptLength: 25,
+        translations: {
+          placeholder: "搜尋文章…",
+          clear_search: "清除",
+          load_more: "載入更多",
+          search_label: "站內搜尋",
+          filters_label: "篩選",
+          zero_results: "找不到 [SEARCH_TERM] 相關結果",
+          many_results: "[COUNT] 筆結果",
+          one_result: "1 筆結果",
+          alt_search: "找不到 [SEARCH_TERM] 相關結果，改顯示 [DISPLAY_QUERY] 的結果",
+          search_suggestion: "找不到 [SEARCH_TERM] 相關結果，試試這些詞",
+          searching: "搜尋中…",
+        }
+      });
+    });
+  </script>
 </Layout>

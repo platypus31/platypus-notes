@@ -28,6 +28,25 @@ draft: false                 # true 的話不會發布（暫存用）
 | A    | ... | ✅ |
 | B    | ... | ⏳ |
 
+## 圖片嵌入
+
+圖片放 `public/images/{topic}/` 對應資料夾（例：`public/images/investing/moat.png`），用絕對路徑引用：
+
+```markdown
+![護城河示意圖](/images/investing/moat-diagram.png)
+```
+
+加 caption 版本：
+
+```html
+<figure>
+  <img src="/images/mountain/kilimanjaro-route.jpg" alt="吉力馬札羅路線圖">
+  <figcaption>圖 1：Machame 路線 6 天行程</figcaption>
+</figure>
+```
+
+檔名全小寫英數 + hyphen、PNG/JPG/WebP 格式、> 500KB 先縮圖。詳見 `public/images/README.md`。
+
 ## 列表
 
 1. 編號列表
