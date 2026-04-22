@@ -24,15 +24,15 @@ export interface TopicInfo {
 
 export const TOPIC_META: Record<Exclude<SiteMode, 'hub'>, TopicInfo> = {
   investing: {
-    name: '價值投資',
+    name: '投資',
     emoji: '📈',
-    desc: '護城河、安全邊際、估值、長期複利',
+    desc: '價值投資、估值方法、流派比較、長期複利',
     url: 'https://platypus-investing.pages.dev',
   },
   mountain: {
-    name: '登山',
-    emoji: '⛰️',
-    desc: '百岳、海外高峰、裝備與經驗',
+    name: '野外',
+    emoji: '🏕️',
+    desc: '登山、潛水、野溪溫泉、露營、其他戶外活動',
     url: 'https://platypus-mountain.pages.dev',
   },
   medicine: {
@@ -77,7 +77,7 @@ export function siteTitle(): string {
 
 export function siteDescription(): string {
   if (SITE_MODE === 'hub') {
-    return 'platypus 的個人筆記 — 投資、登山、醫療、知識管理、AI。';
+    return 'platypus 的個人筆記 — 投資、野外、醫療、知識管理、AI、生活。';
   }
   const t = TOPIC_META[SITE_MODE];
   return `platypus 的${t.name}筆記 — ${t.desc}`;
