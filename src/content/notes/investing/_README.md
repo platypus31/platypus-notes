@@ -1,22 +1,22 @@
-# 🤖 AI 與分身
+# 📈 價值投資
 
-_個人 AI、workflow、prompt engineering_
+_護城河、安全邊際、估值、長期複利_
 
 ## 📝 這個資料夾適合放什麼
 
-- Prompt engineering 實戰
-- Claude / GPT / Gemini 比較
-- 個人 AI 分身設計
-- Agentic workflow 實驗
-- 本地 LLM 部署（Ollama、llama.cpp）
+- 護城河分析（個股或產業）
+- 估值方法筆記（P/E, DCF, PEG）
+- 讀後心得（價投經典著作）
+- 市場事件觀察
+- 投資哲學與紀律
 
 ## 🚀 新增一篇文章
 
-1. **複製模板**：在 Obsidian 打開 `publishing/_TEMPLATE.md` → 右鍵 `Make a copy` → 移到 `ai/` 資料夾
+1. **複製模板**：在 Obsidian 打開 `publishing/_TEMPLATE.md` → 右鍵 `Make a copy` → 移到 `investing/` 資料夾
 2. **改檔名**：用英文 slug，例如 `kilimanjaro-gear-list.md`
 3. **改 frontmatter**：
    ```yaml
-   topic: ai      ← 這個最重要
+   topic: investing      ← 這個最重要
    title: "..."
    date: 2026-04-22
    ```
