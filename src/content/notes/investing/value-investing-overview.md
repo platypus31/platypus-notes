@@ -1,5 +1,6 @@
 ---
 title: "價值投資總覽"
+topic: investing
 slug: "value-investing-overview"
 date: 2026-04-15
 type: interest

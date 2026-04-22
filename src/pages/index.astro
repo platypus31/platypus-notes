@@ -2,19 +2,29 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const notes = (await getCollection('notes'))
+const allNotes = (await getCollection('notes'))
   .filter(n => !n.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const typeLabel: Record<string, string> = {
-  interest: '總覽',
-  concept: '概念',
-  insight: '洞察',
-  event: '事件',
-  reflection: '反思',
-  reference: '分析',
-  note: '筆記',
+const topicMeta: Record<string, { name: string; emoji: string; desc: string }> = {
+  investing: { name: '價值投資', emoji: '📈', desc: '護城河、安全邊際、估值、長期複利' },
+  mountain: { name: '登山', emoji: '⛰️', desc: '百岳、海外高峰、裝備與經驗' },
+  medicine: { name: '醫療', emoji: '🩺', desc: '臨床思考、決策科學、工作路上的觀察' },
+  knowledge: { name: '知識管理', emoji: '🧠', desc: 'Obsidian、第二大腦、AI 整合' },
+  ai: { name: 'AI 與分身', emoji: '🤖', desc: '個人 AI、workflow、prompt engineering' },
+  life: { name: '生活', emoji: '🌱', desc: '咖啡、音樂、電影、書、日常觀察' },
+  misc: { name: '其他', emoji: '📝', desc: '還沒歸類' },
 };
+
+const byTopic: Record<string, typeof allNotes> = {};
+for (const n of allNotes) {
+  const t = n.data.topic || 'misc';
+  if (!byTopic[t]) byTopic[t] = [];
+  byTopic[t].push(n);
+}
+
+const topicOrder = ['investing', 'knowledge', 'medicine', 'mountain', 'ai', 'life', 'misc'];
+const topicsInUse = topicOrder.filter(t => byTopic[t]?.length);
 
 function fmtDate(d: Date) {
   const y = d.getFullYear();
@@ -23,23 +33,23 @@ function fmtDate(d: Date) {
   return `${y}-${m}-${day}`;
 }
 ---
-<Layout title="platypus.notes · 價值投資筆記">
+<Layout title="platypus.notes">
   <section class="hero">
-    <h1>價值投資筆記</h1>
+    <h1>platypus 的筆記</h1>
     <p class="lede">
-      一個專注在長期、基本面、護城河的學習紀錄。<br/>
-      整理我自己讀過、想過、寫過的東西 — 護城河、安全邊際、估值、複利、心理偏誤。
+      一個慢慢寫、慢慢疊的個人知識庫。<br/>
+      關於投資、登山、醫療、AI、知識管理，以及所有想得比讀得久的事。
     </p>
   </section>
 
-  <section class="notes">
-    <h2 class="list-title">全部筆記 <span class="count">({notes.length})</span></h2>
+  <section class="recent">
+    <h2 class="list-title">最新 <span class="count">({Math.min(5, allNotes.length)})</span></h2>
     <ul class="note-list">
-      {notes.map(n => (
+      {allNotes.slice(0, 5).map(n => (
         <li class="note-item">
           <a href={`/notes/${n.id.replace(/\.md$/, '')}/`}>
             <div class="note-meta">
-              <span class="badge badge-{n.data.type}">{typeLabel[n.data.type] ?? n.data.type}</span>
+              <span class="topic-tag">{topicMeta[n.data.topic]?.emoji} {topicMeta[n.data.topic]?.name ?? n.data.topic}</span>
               <time>{fmtDate(n.data.date)}</time>
             </div>
             <h3 class="note-title">{n.data.title}</h3>
@@ -50,85 +60,87 @@ function fmtDate(d: Date) {
     </ul>
   </section>
 
+  <section class="topics">
+    <h2 class="list-title">主題</h2>
+    <div class="topic-grid">
+      {topicsInUse.map(t => (
+        <a href={`#topic-${t}`} class="topic-card">
+          <div class="topic-emoji">{topicMeta[t].emoji}</div>
+          <div class="topic-name">{topicMeta[t].name}</div>
+          <div class="topic-desc">{topicMeta[t].desc}</div>
+          <div class="topic-count">{byTopic[t].length} 篇</div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {topicsInUse.map(t => (
+    <section id={`topic-${t}`} class="topic-section">
+      <h2>{topicMeta[t].emoji} {topicMeta[t].name}</h2>
+      <p class="topic-desc-inline">{topicMeta[t].desc}</p>
+      <ul class="note-list">
+        {byTopic[t].map(n => (
+          <li class="note-item">
+            <a href={`/notes/${n.id.replace(/\.md$/, '')}/`}>
+              <div class="note-meta">
+                <time>{fmtDate(n.data.date)}</time>
+                <span class="type">{n.data.type}</span>
+              </div>
+              <h3 class="note-title">{n.data.title}</h3>
+              {n.data.summary && <p class="note-summary">{n.data.summary}</p>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
   <style>
-    .hero {
-      padding: 1rem 0 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .hero h1 {
-      font-size: 2.4rem;
-      margin: 0 0 1rem;
-      letter-spacing: -0.03em;
-    }
-    .lede {
-      color: var(--fg-muted);
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin: 0;
-    }
+    .hero { padding: 1rem 0 2.5rem; }
+    .hero h1 { font-size: 2.4rem; margin: 0 0 1rem; letter-spacing: -0.03em; }
+    .lede { color: var(--fg-muted); font-size: 1.05rem; line-height: 1.7; margin: 0; }
     .list-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--fg-muted);
-      border-top: none !important;
-      padding-top: 0 !important;
-      margin-top: 0;
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--fg-muted); border-top: none !important; padding-top: 0 !important; margin-top: 0;
     }
     .count { color: var(--fg-muted); font-weight: 400; }
-    .note-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .note-item {
-      margin-bottom: 0.3rem;
-    }
+    .note-list { list-style: none; padding: 0; margin: 0 0 2rem; }
+    .note-item { margin-bottom: 0.3rem; }
     .note-item a {
-      display: block;
-      padding: 1.1rem 1rem;
-      border: 1px solid transparent;
-      border-radius: 6px;
-      color: inherit;
-      text-decoration: none;
+      display: block; padding: 1.1rem 1rem;
+      border: 1px solid transparent; border-radius: 6px;
+      color: inherit; text-decoration: none;
       transition: border-color 0.15s, background 0.15s;
     }
-    .note-item a:hover {
-      border-color: var(--border);
-      background: var(--bg-elev);
-    }
+    .note-item a:hover { border-color: var(--border); background: var(--bg-elev); }
     .note-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 0.4rem;
-      font-size: 0.82rem;
-      color: var(--fg-muted);
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 0.4rem; font-size: 0.82rem; color: var(--fg-muted);
     }
-    .badge {
-      display: inline-block;
-      padding: 0.1rem 0.55rem;
-      border-radius: 3px;
-      font-size: 0.75rem;
-      background: var(--bg-elev);
-      border: 1px solid var(--border);
-      color: var(--fg-muted);
+    .topic-tag { display: inline-block; font-size: 0.8rem; color: var(--accent); }
+    .note-title { font-size: 1.15rem; margin: 0 0 0.25rem; color: var(--fg); line-height: 1.4; }
+    .note-summary { margin: 0.2rem 0 0; color: var(--fg-muted); font-size: 0.92rem; line-height: 1.5; }
+    .topic-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem; margin-bottom: 3rem;
     }
-    .badge-concept { border-color: #4a7b9e; color: #8ec4e2; }
-    .badge-insight { border-color: #c48a4b; color: var(--accent); }
-    .badge-reflection { border-color: #7a6ec4; color: #ab9ae2; }
-    .badge-event { border-color: #c46e6e; color: #e29a9a; }
-    .note-title {
-      font-size: 1.15rem;
-      margin: 0 0 0.25rem;
-      color: var(--fg);
-      line-height: 1.4;
+    .topic-card {
+      display: block; padding: 1.2rem 1rem;
+      border: 1px solid var(--border); border-radius: 8px;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.15s, transform 0.15s;
     }
-    .note-summary {
-      margin: 0.2rem 0 0;
-      color: var(--fg-muted);
-      font-size: 0.92rem;
-      line-height: 1.5;
+    .topic-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .topic-emoji { font-size: 1.8rem; margin-bottom: 0.4rem; }
+    .topic-name { font-weight: 600; font-size: 1rem; color: var(--fg); }
+    .topic-desc { font-size: 0.82rem; color: var(--fg-muted); margin: 0.3rem 0; line-height: 1.5; }
+    .topic-count { font-size: 0.78rem; color: var(--accent); margin-top: 0.4rem; }
+    .topic-section { scroll-margin-top: 2rem; }
+    .topic-section h2 { font-size: 1.5rem; margin-top: 3rem; }
+    .topic-desc-inline { color: var(--fg-muted); margin: 0.3rem 0 1.2rem; font-size: 0.92rem; }
+    .type {
+      font-size: 0.75rem; padding: 0.1rem 0.45rem;
+      border: 1px solid var(--border); border-radius: 3px; color: var(--fg-muted);
     }
   </style>
 </Layout>

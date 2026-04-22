@@ -1,5 +1,6 @@
 ---
 title: "台積電 2330 深度分析"
+topic: investing
 slug: "tsmc-2330-deep-dive"
 date: 2026-03-28
 type: reference

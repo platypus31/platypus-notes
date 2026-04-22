@@ -1,5 +1,6 @@
 ---
 title: "護城河五大來源"
+topic: investing
 slug: "moat-five-sources"
 date: 2026-04-19
 type: concept

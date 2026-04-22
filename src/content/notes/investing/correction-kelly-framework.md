@@ -1,5 +1,6 @@
 ---
 title: "修正期框架：Kelly + Buy & Hold"
+topic: investing
 slug: "correction-kelly-framework"
 date: 2026-04-19
 type: insight

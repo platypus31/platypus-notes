@@ -1,5 +1,6 @@
 ---
 title: "ASML EUV 壟斷護城河"
+topic: investing
 slug: "asml-euv-moat"
 date: 2026-04-19
 type: insight

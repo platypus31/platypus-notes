@@ -1,5 +1,6 @@
 ---
 title: "ERP 歷史低點 + CAPE 39 警訊"
+topic: investing
 slug: "erp-2026q1-warning"
 date: 2026-04-19
 type: insight

@@ -1,5 +1,6 @@
 ---
 title: "護城河理論"
+topic: investing
 slug: "moat-theory"
 date: 2026-04-19
 type: concept

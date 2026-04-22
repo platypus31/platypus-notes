@@ -1,5 +1,6 @@
 ---
 title: "Antifragile 認知同構論"
+topic: investing
 slug: "antifragile-cognitive-isomorphism"
 date: 2026-04-19
 type: reflection

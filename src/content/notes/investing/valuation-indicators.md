@@ -1,5 +1,6 @@
 ---
 title: "估值指標：貴不貴"
+topic: investing
 slug: "valuation-indicators"
 date: 2026-04-19
 type: concept

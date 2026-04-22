@@ -1,5 +1,6 @@
 ---
 title: "P/E 市盈率估值"
+topic: investing
 slug: "pe-ratio"
 date: 2026-04-19
 type: concept

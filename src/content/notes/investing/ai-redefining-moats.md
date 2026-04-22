@@ -1,5 +1,6 @@
 ---
 title: "AI 正在重新定義護城河"
+topic: investing
 slug: "ai-redefining-moats"
 date: 2026-04-19
 type: insight

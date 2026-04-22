@@ -1,5 +1,6 @@
 ---
 title: "S&P 500 市場估值快照"
+topic: investing
 slug: "sp500-valuation-snapshot"
 date: 2026-04-19
 type: insight

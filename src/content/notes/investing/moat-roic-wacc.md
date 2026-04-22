@@ -1,5 +1,6 @@
 ---
 title: "寬/窄護城河量化門檻"
+topic: investing
 slug: "moat-roic-wacc"
 date: 2026-04-22
 type: concept

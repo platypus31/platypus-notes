@@ -1,5 +1,6 @@
 ---
 title: "2026 Q1 美股 12% 折價窗口"
+topic: investing
 slug: "market-correction-2026q1"
 date: 2026-04-19
 type: event
