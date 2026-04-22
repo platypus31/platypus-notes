@@ -9,6 +9,7 @@ const notes = defineCollection({
     date: z.coerce.date(),
     type: z.string().default('note'),
     topic: z.string().default('misc'),
+    subtopic: z.string().optional(),
     summary: z.string().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().optional().default(false),

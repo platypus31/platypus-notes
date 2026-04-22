@@ -1,6 +1,7 @@
 ---
 title: "文章標題（中文或英文都行）"
 topic: investing            # 主題：investing / mountain / medicine / knowledge / ai / life
+subtopic: ""                # 可選；knowledge 底下建議標（law / accounting / chinese-medicine / note-taking ...）未來搬出獨立站用
 date: 2026-04-22             # 發布日期 YYYY-MM-DD
 type: note                   # note / concept / insight / reflection / event / reference
 summary: "一行摘要會顯示在首頁列表和主題頁面，約 30-60 字最剛好"

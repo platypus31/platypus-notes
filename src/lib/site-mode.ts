@@ -42,9 +42,9 @@ export const TOPIC_META: Record<Exclude<SiteMode, 'hub'>, TopicInfo> = {
     url: 'https://platypus-medicine.pages.dev',
   },
   knowledge: {
-    name: '知識管理',
+    name: '知識',
     emoji: '🧠',
-    desc: 'Obsidian、第二大腦、AI 整合',
+    desc: '會計、法律、中醫、第二大腦、筆記法、各式雜知識',
     url: 'https://platypus-knowledge.pages.dev',
   },
   ai: {
@@ -77,7 +77,7 @@ export function siteTitle(): string {
 
 export function siteDescription(): string {
   if (SITE_MODE === 'hub') {
-    return 'platypus 的個人筆記 — 投資、野外、醫療、知識管理、AI、生活。';
+    return 'platypus 的個人筆記 — 投資、野外、醫療、知識、AI、生活。';
   }
   const t = TOPIC_META[SITE_MODE];
   return `platypus 的${t.name}筆記 — ${t.desc}`;

@@ -1,14 +1,30 @@
-# 🧠 知識管理
+# 🧠 知識
 
-_Obsidian、第二大腦、AI 整合_
+_會計、法律、中醫、第二大腦、筆記法、各式雜知識_
+
+> 資料夾 slug 保持 `knowledge/`（不動 folder / env var）。網站顯示統一為「知識」。
+> 子主題累積到一定量（例如 20+ 篇法律）可以搬出來獨立成新主題站。
 
 ## 📝 這個資料夾適合放什麼
 
-- Obsidian plugin 評測
-- 第二大腦架構筆記
-- Readwise / Obsidian / Notion workflow
-- 閱讀法、筆記法、PARA 實踐
-- AI 整合個人知識庫的實驗
+- 會計 / 財報 / 稅務基礎
+- 法律常識（醫療法、契約、個資）
+- 中醫 / 替代療法學習筆記
+- Obsidian / Notion / Readwise workflow
+- 筆記法、PARA、第二大腦
+- 其他跨領域雜學
+
+## 💡 子主題標記（可選但建議）
+
+frontmatter 加 `subtopic` 欄位方便未來搬出去：
+
+```yaml
+topic: knowledge
+subtopic: law            # 或 accounting / chinese-medicine / note-taking ...
+title: "..."
+```
+
+當某個 subtopic 累積夠多（例如 20+ 篇法律），跟 Claude 說「把法律搬出來變獨立站」，會自動 `git mv` + 加新主題 `law` 到 site-mode.ts + 提示新 Cloudflare project 步驟。
 
 ## 🚀 新增一篇文章
 
