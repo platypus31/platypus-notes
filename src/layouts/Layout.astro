@@ -1,9 +1,14 @@
 ---
+import { SITE_MODE, TOPIC_META, siteDescription } from '../lib/site-mode';
+
 interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'platypus 的個人筆記 — 投資、登山、醫療、知識管理、AI。' } = Astro.props;
+const { title, description = siteDescription() } = Astro.props;
+
+const isHub = SITE_MODE === 'hub';
+const siteName = isHub ? 'platypus' : `platypus · ${TOPIC_META[SITE_MODE].name}`;
 ---
 <!doctype html>
 <html lang="zh-Hant">
@@ -18,7 +23,13 @@ const { title, description = 'platypus 的個人筆記 — 投資、登山、醫
   <body>
     <div class="wrap">
       <header class="site-header">
-        <a href="/" class="site-title">platypus<span class="dot">.</span>notes</a>
+        <a href="/" class="site-title">
+          {isHub ? (
+            <>platypus<span class="dot">.</span>notes</>
+          ) : (
+            <>platypus<span class="dot">.</span>{TOPIC_META[SITE_MODE].name}</>
+          )}
+        </a>
         <nav>
           <a href="/">筆記</a>
           <a href="/about">關於</a>

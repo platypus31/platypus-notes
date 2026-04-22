@@ -1,20 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { SITE_MODE, TOPIC_META, TOPIC_ORDER, siteTitle } from '../lib/site-mode';
 
 const allNotes = (await getCollection('notes'))
   .filter(n => !n.data.draft)
+  .filter(n => SITE_MODE === 'hub' ? true : n.data.topic === SITE_MODE)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const topicMeta: Record<string, { name: string; emoji: string; desc: string }> = {
-  investing: { name: '價值投資', emoji: '📈', desc: '護城河、安全邊際、估值、長期複利' },
-  mountain: { name: '登山', emoji: '⛰️', desc: '百岳、海外高峰、裝備與經驗' },
-  medicine: { name: '醫療', emoji: '🩺', desc: '臨床思考、決策科學、工作路上的觀察' },
-  knowledge: { name: '知識管理', emoji: '🧠', desc: 'Obsidian、第二大腦、AI 整合' },
-  ai: { name: 'AI 與分身', emoji: '🤖', desc: '個人 AI、workflow、prompt engineering' },
-  life: { name: '生活', emoji: '🌱', desc: '咖啡、音樂、電影、書、日常觀察' },
-  misc: { name: '其他', emoji: '📝', desc: '還沒歸類' },
-};
 
 const byTopic: Record<string, typeof allNotes> = {};
 for (const n of allNotes) {
@@ -22,9 +14,7 @@ for (const n of allNotes) {
   if (!byTopic[t]) byTopic[t] = [];
   byTopic[t].push(n);
 }
-
-const topicOrder = ['investing', 'knowledge', 'medicine', 'mountain', 'ai', 'life', 'misc'];
-const topicsInUse = topicOrder.filter(t => byTopic[t]?.length);
+const topicsInUse = TOPIC_ORDER.filter(t => byTopic[t]?.length);
 
 function fmtDate(d: Date) {
   const y = d.getFullYear();
@@ -32,68 +22,83 @@ function fmtDate(d: Date) {
   const day = String(d.getDate()).padStart(2, '0');
   return `${y}-${m}-${day}`;
 }
+
+const isHub = SITE_MODE === 'hub';
+const currentTopic = !isHub ? TOPIC_META[SITE_MODE] : null;
+
+function topicInfo(t: string) {
+  return (TOPIC_META as Record<string, { name: string; emoji: string }>)[t];
+}
 ---
-<Layout title="platypus.notes">
-  <section class="hero">
-    <h1>platypus 的筆記</h1>
-    <p class="lede">
-      一個慢慢寫、慢慢疊的個人知識庫。<br/>
-      關於投資、登山、醫療、AI、知識管理，以及所有想得比讀得久的事。
-    </p>
-  </section>
+<Layout title={siteTitle()}>
+  {isHub ? (
+    <>
+      <section class="hero">
+        <h1>platypus 的筆記</h1>
+        <p class="lede">
+          私人入口。慢慢寫、慢慢疊的個人知識庫。<br/>
+          投資、登山、醫療、AI、知識管理，以及所有想得比讀得久的事。
+        </p>
+      </section>
 
-  <section class="recent">
-    <h2 class="list-title">最新 <span class="count">({Math.min(5, allNotes.length)})</span></h2>
-    <ul class="note-list">
-      {allNotes.slice(0, 5).map(n => (
-        <li class="note-item">
-          <a href={`/notes/${n.id.replace(/\.md$/, '')}/`}>
-            <div class="note-meta">
-              <span class="topic-tag">{topicMeta[n.data.topic]?.emoji} {topicMeta[n.data.topic]?.name ?? n.data.topic}</span>
-              <time>{fmtDate(n.data.date)}</time>
-            </div>
-            <h3 class="note-title">{n.data.title}</h3>
-            {n.data.summary && <p class="note-summary">{n.data.summary}</p>}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  <section class="topics">
-    <h2 class="list-title">主題</h2>
-    <div class="topic-grid">
-      {topicsInUse.map(t => (
-        <a href={`#topic-${t}`} class="topic-card">
-          <div class="topic-emoji">{topicMeta[t].emoji}</div>
-          <div class="topic-name">{topicMeta[t].name}</div>
-          <div class="topic-desc">{topicMeta[t].desc}</div>
-          <div class="topic-count">{byTopic[t].length} 篇</div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  {topicsInUse.map(t => (
-    <section id={`topic-${t}`} class="topic-section">
-      <h2>{topicMeta[t].emoji} {topicMeta[t].name}</h2>
-      <p class="topic-desc-inline">{topicMeta[t].desc}</p>
-      <ul class="note-list">
-        {byTopic[t].map(n => (
-          <li class="note-item">
-            <a href={`/notes/${n.id.replace(/\.md$/, '')}/`}>
-              <div class="note-meta">
-                <time>{fmtDate(n.data.date)}</time>
-                <span class="type">{n.data.type}</span>
-              </div>
-              <h3 class="note-title">{n.data.title}</h3>
-              {n.data.summary && <p class="note-summary">{n.data.summary}</p>}
+      <section class="topics">
+        <h2 class="list-title">主題入口</h2>
+        <div class="topic-grid">
+          {TOPIC_ORDER.map(t => (
+            <a href={TOPIC_META[t].url} class="topic-card" rel="noopener">
+              <div class="topic-emoji">{TOPIC_META[t].emoji}</div>
+              <div class="topic-name">{TOPIC_META[t].name}</div>
+              <div class="topic-desc">{TOPIC_META[t].desc}</div>
+              <div class="topic-count">{byTopic[t]?.length ?? 0} 篇</div>
             </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  ))}
+          ))}
+        </div>
+      </section>
+
+      <section class="recent">
+        <h2 class="list-title">最新 <span class="count">({Math.min(5, allNotes.length)})</span></h2>
+        <ul class="note-list">
+          {allNotes.slice(0, 5).map(n => (
+            <li class="note-item">
+              <a href={`/notes/${n.id.replace(/\.md$/, '')}/`}>
+                <div class="note-meta">
+                  <span class="topic-tag">{topicInfo(n.data.topic)?.emoji} {topicInfo(n.data.topic)?.name ?? n.data.topic}</span>
+                  <time>{fmtDate(n.data.date)}</time>
+                </div>
+                <h3 class="note-title">{n.data.title}</h3>
+                {n.data.summary && <p class="note-summary">{n.data.summary}</p>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  ) : (
+    <>
+      <section class="hero">
+        <h1>{currentTopic!.emoji} {currentTopic!.name}</h1>
+        <p class="lede">{currentTopic!.desc}</p>
+      </section>
+
+      <section class="topic-all">
+        <h2 class="list-title">所有筆記 <span class="count">({allNotes.length})</span></h2>
+        <ul class="note-list">
+          {allNotes.map(n => (
+            <li class="note-item">
+              <a href={`/notes/${n.id.replace(/\.md$/, '')}/`}>
+                <div class="note-meta">
+                  <time>{fmtDate(n.data.date)}</time>
+                  <span class="type">{n.data.type}</span>
+                </div>
+                <h3 class="note-title">{n.data.title}</h3>
+                {n.data.summary && <p class="note-summary">{n.data.summary}</p>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  )}
 
   <style>
     .hero { padding: 1rem 0 2.5rem; }
@@ -135,9 +140,6 @@ function fmtDate(d: Date) {
     .topic-name { font-weight: 600; font-size: 1rem; color: var(--fg); }
     .topic-desc { font-size: 0.82rem; color: var(--fg-muted); margin: 0.3rem 0; line-height: 1.5; }
     .topic-count { font-size: 0.78rem; color: var(--accent); margin-top: 0.4rem; }
-    .topic-section { scroll-margin-top: 2rem; }
-    .topic-section h2 { font-size: 1.5rem; margin-top: 3rem; }
-    .topic-desc-inline { color: var(--fg-muted); margin: 0.3rem 0 1.2rem; font-size: 0.92rem; }
     .type {
       font-size: 0.75rem; padding: 0.1rem 0.45rem;
       border: 1px solid var(--border); border-radius: 3px; color: var(--fg-muted);

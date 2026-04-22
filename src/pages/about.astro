@@ -1,47 +1,73 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SITE_MODE, TOPIC_META } from '../lib/site-mode';
+
+const isHub = SITE_MODE === 'hub';
+const topic = !isHub ? TOPIC_META[SITE_MODE] : null;
 ---
-<Layout title="關於 · platypus.notes">
+<Layout title={isHub ? '關於 · platypus.notes' : `關於 · platypus · ${topic!.name}`}>
   <article class="prose">
-    <h1>關於這個站</h1>
+    {isHub ? (
+      <>
+        <h1>關於這個站</h1>
+        <p>
+          這裡是 <strong>platypus</strong> 的個人筆記入口 — 私人 index，按主題分流到各自的站。
+        </p>
+        <p>
+          每個主題都是獨立的網站，彼此不互相連結。我只在這裡有總覽。
+        </p>
 
-    <p>
-      這裡是 <strong>platypus</strong> 的個人筆記 — 我把自己讀過、想過、寫過的東西
-      分主題放在這裡，主要是給自己看，也歡迎路過的人翻翻。
-    </p>
+        <h2>為什麼這樣分</h2>
+        <p>
+          投資、登山、醫療、知識管理這幾塊的讀者重疊度很低。
+          與其把什麼都放在同一個站讓訪客看得眼花，不如分開，讓各自的讀者看到純粹的內容。
+        </p>
 
-    <h2>主題</h2>
-    <ul>
-      <li><strong>📈 價值投資</strong> — 護城河、安全邊際、估值、長期複利</li>
-      <li><strong>⛰️ 登山</strong> — 百岳、海外高峰、裝備、經驗紀錄</li>
-      <li><strong>🩺 醫療</strong> — 臨床思考、決策科學、工作路上的觀察</li>
-      <li><strong>🧠 知識管理</strong> — Obsidian、第二大腦、AI 整合</li>
-      <li><strong>🤖 AI 與分身</strong> — 個人 AI、workflow、prompt engineering</li>
-      <li><strong>🌱 生活</strong> — 咖啡、音樂、電影、書、日常觀察</li>
-    </ul>
+        <h2>免責聲明</h2>
+        <blockquote>
+          本站所有內容僅為個人學習與思考紀錄，<strong>不構成任何投資、醫療或登山建議</strong>。
+          任何投資決策、醫療判斷、戶外活動請自行評估、自負盈虧與風險。
+          文中提到的任何個股、ETF、金融商品、藥物、登山路線皆非推薦。
+        </blockquote>
 
-    <h2>為什麼寫這個站</h2>
-    <p>
-      比起追蹤當下的消息流，我更相信把自己的思考寫清楚、反覆重讀、跟過去的自己對話，
-      是真正能長期走下去的方法。
-    </p>
-    <p>
-      這個站是我個人知識庫的公開版 — 原始稿來自我自己的 neuron 筆記（數百顆個人知識節點的圖譜），
-      經過編修才放到這裡。每一篇都標了日期、主題、類型，方便你判斷這是當下的想法還是沉澱過的看法。
-    </p>
+        <h2>技術</h2>
+        <p>
+          Astro + Cloudflare Pages，原始檔寫在 Markdown，托管在 GitHub，每次 push 自動部署。
+          同一個 repo 用 <code>PLATYPUS_MODE</code> 環境變數產出不同主題站。
+        </p>
 
-    <h2>免責聲明</h2>
-    <blockquote>
-      本站內容僅為個人學習與思考紀錄，<strong>不構成任何投資、醫療或登山建議</strong>。
-      任何投資決策、醫療判斷、戶外活動請自行評估、自負盈虧與風險。
-      文中提到的任何個股、ETF、金融商品、藥物、登山路線皆非推薦。
-    </blockquote>
+        <p><a href="/">← 回入口</a></p>
+      </>
+    ) : (
+      <>
+        <h1>關於這個站</h1>
+        <p>
+          這裡是 <strong>platypus 的{topic!.name}筆記</strong> — {topic!.desc}。
+        </p>
+        <p>
+          原始稿來自我自己的 neuron 筆記（個人知識節點圖譜），經過編修才放到這裡。
+          每一篇都標了日期、類型，方便你判斷這是當下的想法還是沉澱過的看法。
+        </p>
 
-    <h2>技術</h2>
-    <p>
-      Astro + Cloudflare Pages，原始檔寫在 Markdown，托管在 GitHub，每次 push 自動部署。
-    </p>
+        <h2>為什麼寫這個站</h2>
+        <p>
+          比起追蹤當下的消息流，我更相信把自己的思考寫清楚、反覆重讀、跟過去的自己對話，
+          是真正能長期走下去的方法。
+        </p>
 
-    <p><a href="/">← 回筆記列表</a></p>
+        <h2>免責聲明</h2>
+        <blockquote>
+          本站內容僅為個人學習與思考紀錄，<strong>不構成任何建議</strong>。
+          任何決策請自行評估、自負盈虧與風險。
+        </blockquote>
+
+        <h2>技術</h2>
+        <p>
+          Astro + Cloudflare Pages，原始檔寫在 Markdown，托管在 GitHub，每次 push 自動部署。
+        </p>
+
+        <p><a href="/">← 回筆記列表</a></p>
+      </>
+    )}
   </article>
 </Layout>

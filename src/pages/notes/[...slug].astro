@@ -1,10 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import { SITE_MODE } from '../../lib/site-mode';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
-  return notes.map(n => ({
+  // 關鍵安全層：主題站 build 時只產出該主題的 note 頁面，
+  // 其他主題的 URL 根本不存在（避免 craft URL 穿透隔離）
+  const filtered = notes.filter(n => {
+    if (n.data.draft) return false;
+    if (SITE_MODE === 'hub') return true;
+    return n.data.topic === SITE_MODE;
+  });
+  return filtered.map(n => ({
     params: { slug: n.id.replace(/\.md$/, '') },
     props: { note: n },
   }));
