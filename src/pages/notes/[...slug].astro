@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map(n => ({
+    params: { slug: n.id.replace(/\.md$/, '') },
+    props: { note: n },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+
+function fmtDate(d: Date) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+---
+<Layout title={`${note.data.title} · platypus.notes`} description={note.data.summary}>
+  <article>
+    <header class="post-header">
+      <div class="post-meta">
+        <span class="type">{note.data.type}</span>
+        <time>{fmtDate(note.data.date)}</time>
+      </div>
+      <h1>{note.data.title}</h1>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <footer class="post-footer">
+      <a href="/">← 回筆記列表</a>
+    </footer>
+  </article>
+
+  <style>
+    article { padding: 1rem 0; }
+    .post-header {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .post-meta {
+      display: flex;
+      gap: 1rem;
+      color: var(--fg-muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .post-header h1 {
+      font-size: 2rem;
+      margin: 0;
+      line-height: 1.25;
+    }
+    .prose :global(h2) { margin-top: 2.5rem; }
+    .prose :global(h3) { margin-top: 1.8rem; }
+    .prose :global(p) { margin: 1rem 0; }
+    .prose :global(ul), .prose :global(ol) { padding-left: 1.4rem; }
+    .post-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .post-footer a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .post-footer a:hover { color: var(--accent); }
+  </style>
+</Layout>

@@ -1,0 +1,144 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'platypus 的價值投資筆記：護城河、安全邊際、估值、長期複利。' } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site-header">
+        <a href="/" class="site-title">platypus<span class="dot">.</span>notes</a>
+        <nav>
+          <a href="/">筆記</a>
+          <a href="/about">關於</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer>
+        <p>© 2026 platypus · 本站內容僅為個人學習紀錄，非投資建議</p>
+        <p>Powered by Astro + Cloudflare Pages</p>
+      </footer>
+    </div>
+
+    <style is:global>
+      :root {
+        --bg: #0f1115;
+        --bg-elev: #161922;
+        --fg: #e6e8ee;
+        --fg-muted: #8b93a7;
+        --accent: #e9bd6e;
+        --border: #242835;
+        --maxw: 720px;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Helvetica Neue", sans-serif;
+        font-size: 17px;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .site-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 2.5rem;
+      }
+      .site-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: var(--fg);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+      }
+      .site-title .dot { color: var(--accent); }
+      .site-header nav a {
+        color: var(--fg-muted);
+        text-decoration: none;
+        margin-left: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .site-header nav a:hover { color: var(--fg); }
+      main { min-height: 60vh; }
+      footer {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+        color: var(--fg-muted);
+        font-size: 0.85rem;
+        text-align: center;
+      }
+      footer p { margin: 0.3rem 0; }
+      a { color: var(--accent); }
+      a:hover { text-decoration: underline; }
+      h1, h2, h3 {
+        color: var(--fg);
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+      }
+      h1 { font-size: 2rem; margin-top: 0; }
+      h2 { font-size: 1.35rem; margin-top: 2.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+      h3 { font-size: 1.1rem; margin-top: 2rem; }
+      blockquote {
+        border-left: 3px solid var(--accent);
+        padding: 0.3rem 1rem;
+        margin: 1.5rem 0;
+        color: var(--fg-muted);
+        background: var(--bg-elev);
+        border-radius: 0 4px 4px 0;
+      }
+      code {
+        background: var(--bg-elev);
+        padding: 0.15em 0.4em;
+        border-radius: 3px;
+        font-size: 0.9em;
+        font-family: "SF Mono", Consolas, Menlo, monospace;
+      }
+      pre {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1rem;
+        overflow-x: auto;
+        font-size: 0.88em;
+      }
+      pre code { background: none; padding: 0; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95em;
+      }
+      th, td {
+        border: 1px solid var(--border);
+        padding: 0.5rem 0.8rem;
+        text-align: left;
+      }
+      th { background: var(--bg-elev); }
+      hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+      ul li { margin: 0.3rem 0; }
+    </style>
+  </body>
+</html>
