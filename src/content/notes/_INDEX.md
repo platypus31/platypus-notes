@@ -4,14 +4,14 @@
 
 ## 📊 統計
 
-- **總筆數**：14
-- **主題數**：1 個有內容 / 6 個資料夾
+- **總筆數**：20
+- **主題數**：2 個有內容 / 6 個資料夾
 
-  - 📈 價值投資: `14` ██████████████
-  - 🧠 知識管理: `0` 
+  - 📈 投資: `14` ██████████████
+  - 🧠 知識: `0` 
   - 🩺 醫療: `0` 
-  - ⛰️ 登山: `0` 
-  - 🤖 AI 與分身: `0` 
+  - 🏕️ 野外: `0` 
+  - 🤖 AI 與分身: `6` ██████
   - 🌱 生活: `0` 
 
 ---
@@ -20,9 +20,9 @@
 
 ---
 
-## 📈 價值投資  `(14 篇)`
+## 📈 投資  `(14 篇)`
 
-_護城河、安全邊際、估值、長期複利_
+_價值投資、估值方法、流派比較、長期複利_
 
 - **[寬/窄護城河量化門檻](./investing/moat-roic-wacc.md)** — `2026-04-22` `concept`
   - 量化護城河強度：Wide Moat = ROIC−WACC ≥ +5pp；Narrow Moat ≥ +2.5pp
@@ -53,9 +53,9 @@ _護城河、安全邊際、估值、長期複利_
 - **[台積電 2330 深度分析](./investing/tsmc-2330-deep-dive.md)** — `2026-03-28` `reference`
   - 台積電完美通過所有選股標準：淨利率48%、EPS YoY+46%、PE~28x、護城河極寬（先進製程72%全球市佔）。…
 
-## 🧠 知識管理  `(0 篇)`
+## 🧠 知識  `(0 篇)`
 
-_Obsidian、第二大腦、AI 整合_
+_會計、法律、中醫、第二大腦、筆記法、各式雜知識_
 
 （還沒有文章，來第一篇吧）
 
@@ -65,17 +65,28 @@ _臨床思考、決策科學、工作路上的觀察_
 
 （還沒有文章，來第一篇吧）
 
-## ⛰️ 登山  `(0 篇)`
+## 🏕️ 野外  `(0 篇)`
 
-_百岳、海外高峰、裝備與經驗_
+_登山、潛水、野溪溫泉、露營、其他戶外活動_
 
 （還沒有文章，來第一篇吧）
 
-## 🤖 AI 與分身  `(0 篇)`
+## 🤖 AI 與分身  `(6 篇)`
 
 _個人 AI、workflow、prompt engineering_
 
-（還沒有文章，來第一篇吧）
+- **[探索投資智慧：Barbell策略與三大過濾條件](./ai/2026-04-28-meta-barbell-three-layer-filter.md)** — `2026-04-28` `insight`
+  - ```markdown
+- **[Output Obsession: Turning Digital Twins into Productive Assets](./ai/2026-04-11-insight-output-anxiety.md)** — `2026-04-11` `insight`
+  - Are you stuck in the \"perfect is the enemy of good\" trap? This phrase refers to 
+- **[Bridging Justice Theory and Administrative Law: The Dual Faces of Sandel's Ratio Principle](./ai/2026-04-08-bridge-collision-sandel-admin-law.md)** — `2026-04-08` `insight`
+  - ```markdown
+- **[Game Theory in Action: Navigating the Complexities of Money Laundering and Anti-Money Laundering](./ai/2026-04-04-bridge-aml-game-theory.md)** — `2026-04-04` `insight`
+  - ---
+- **[Zero ERP in the S&P 500: Why Inaction May Be Your Best Move](./ai/2026-04-01-insight-market-erp-2026-03.md)** — `2026-04-01` `insight`
+  - ---
+- **[Betting on Behavior: How Poker Decisions Illuminate Economic Principles](./ai/2026-03-29-bridge-poker-behavioral-econ.md)** — `2026-03-29` `insight`
+  - **Betting on Behavior: How Poker Decisions Illuminate Economic Principles**
 
 ## 🌱 生活  `(0 篇)`
 
