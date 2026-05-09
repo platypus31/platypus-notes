@@ -4,14 +4,14 @@
 
 ## 📊 統計
 
-- **總筆數**：29
+- **總筆數**：30
 - **主題數**：2 個有內容 / 6 個資料夾
 
   - 📈 投資: `14` ██████████████
   - 🧠 知識: `0` 
   - 🩺 醫療: `0` 
   - 🏕️ 野外: `0` 
-  - 🤖 AI 與分身: `15` ███████████████
+  - 🤖 AI 與分身: `16` ████████████████
   - 🌱 生活: `0` 
 
 ---
@@ -71,10 +71,12 @@ _登山、潛水、野溪溫泉、露營、其他戶外活動_
 
 （還沒有文章，來第一篇吧）
 
-## 🤖 AI 與分身  `(15 篇)`
+## 🤖 AI 與分身  `(16 篇)`
 
 _個人 AI、workflow、prompt engineering_
 
+- **[聯動智能：AI協作三原則，打造高效工作流](./ai/2026-05-09-insight-ai-workflow-principles.md)** — `2026-05-09` `insight`
+  - AI 與分身產線自動產出（content-engine）
 - **[使用AI自動化记账，告别繁琐的手动输入](./ai/2026-05-08-neuron-ai-bookkeeping-automation.md)** — `2026-05-08` `insight`
   - AI 與分身產線自動產出（content-engine）
 - **[跨領域智慧：從數學角度探索抗脆弱性策略](./ai/2026-05-07-insight-antifragile-bet-hedging-frequency-dependent.md)** — `2026-05-07` `insight`
