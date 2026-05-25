@@ -4,14 +4,14 @@
 
 ## 📊 統計
 
-- **總筆數**：36
+- **總筆數**：37
 - **主題數**：2 個有內容 / 6 個資料夾
 
   - 📈 投資: `14` ██████████████
   - 🧠 知識: `0` 
   - 🩺 醫療: `0` 
   - 🏕️ 野外: `0` 
-  - 🤖 AI 與分身: `22` ████████████████████
+  - 🤖 AI 與分身: `23` ████████████████████
   - 🌱 生活: `0` 
 
 ---
@@ -71,10 +71,12 @@ _登山、潛水、野溪溫泉、露營、其他戶外活動_
 
 （還沒有文章，來第一篇吧）
 
-## 🤖 AI 與分身  `(22 篇)`
+## 🤖 AI 與分身  `(23 篇)`
 
 _個人 AI、workflow、prompt engineering_
 
+- **[多代理編排列舉：AI 代理間的有效協調機制](./ai/2026-05-25-wiki-promoted-multi-agent-orchestration.md)** — `2026-05-25` `insight`
+  - AI 與分身產線自動產出（content-engine）
 - **[使用 Obsidian 建立全方位投資管理平台](./ai/2026-05-24-obsidian-investment-dashboard.md)** — `2026-05-24` `insight`
   - AI 與分身產線自動產出（content-engine）
 - **[臨床案例驅動的醫學學習法：Zettelkasten 系統化實踐](./ai/2026-05-23-medical-knowledge-zettelkasten.md)** — `2026-05-23` `insight`
