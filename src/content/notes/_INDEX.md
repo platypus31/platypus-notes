@@ -4,14 +4,14 @@
 
 ## 📊 統計
 
-- **總筆數**：38
+- **總筆數**：39
 - **主題數**：2 個有內容 / 6 個資料夾
 
   - 📈 投資: `14` ██████████████
   - 🧠 知識: `0` 
   - 🩺 醫療: `0` 
   - 🏕️ 野外: `0` 
-  - 🤖 AI 與分身: `24` ████████████████████
+  - 🤖 AI 與分身: `25` ████████████████████
   - 🌱 生活: `0` 
 
 ---
@@ -71,10 +71,12 @@ _登山、潛水、野溪溫泉、露營、其他戶外活動_
 
 （還沒有文章，來第一篇吧）
 
-## 🤖 AI 與分身  `(24 篇)`
+## 🤖 AI 與分身  `(25 篇)`
 
 _個人 AI、workflow、prompt engineering_
 
+- **[劃 Nuevo 知識管理新風貌：Agentic Knowledge Management（AKM）探秘](./ai/2026-05-27-concept-agentic-knowledge-mgmt.md)** — `2026-05-27` `insight`
+  - AI 與分身產線自動產出（content-engine）
 - **[達峰極致：嘉明湖四天三夜登山攻略](./ai/2026-05-26-ptt-hiking-jiaminglake-2026.md)** — `2026-05-26` `insight`
   - AI 與分身產線自動產出（content-engine）
 - **[多代理編排列舉：AI 代理間的有效協調機制](./ai/2026-05-25-wiki-promoted-multi-agent-orchestration.md)** — `2026-05-25` `insight`
