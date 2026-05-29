@@ -4,14 +4,14 @@
 
 ## 📊 統計
 
-- **總筆數**：40
+- **總筆數**：41
 - **主題數**：2 個有內容 / 6 個資料夾
 
   - 📈 投資: `14` ██████████████
   - 🧠 知識: `0` 
   - 🩺 醫療: `0` 
   - 🏕️ 野外: `0` 
-  - 🤖 AI 與分身: `26` ████████████████████
+  - 🤖 AI 與分身: `27` ████████████████████
   - 🌱 生活: `0` 
 
 ---
@@ -71,10 +71,12 @@ _登山、潛水、野溪溫泉、露營、其他戶外活動_
 
 （還沒有文章，來第一篇吧）
 
-## 🤖 AI 與分身  `(26 篇)`
+## 🤖 AI 與分身  `(27 篇)`
 
 _個人 AI、workflow、prompt engineering_
 
+- **[人工智能跨域智慧：醫學、投資與面試的共通密碼](./ai/2026-05-29-concept-situational-awareness-crossdomain.md)** — `2026-05-29` `insight`
+  - AI 與分身產線自動產出（content-engine）
 - **[探秘嘉明湖：四天三夜高海拔挑戰與高山症防範實戰攻略](./ai/2026-05-28-ptt-hiking-jiaminglake-2026.md)** — `2026-05-28` `insight`
   - AI 與分身產線自動產出（content-engine）
 - **[劃 Nuevo 知識管理新風貌：Agentic Knowledge Management（AKM）探秘](./ai/2026-05-27-concept-agentic-knowledge-mgmt.md)** — `2026-05-27` `insight`
