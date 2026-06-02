@@ -5,7 +5,8 @@ slug: "ptt-hiking-jiaminglake-2026"
 date: 2026-05-26
 type: insight
 summary: "AI 與分身產線自動產出（content-engine）"
-draft: false
+draft: true
+removed_reason: "嘉明湖文舊版重複稿（同 slug），簡體字殘留，2026-06-02 下架一併移除"
 ---
 
 # 达峰极致：嘉明湖四天三夜登山攻略

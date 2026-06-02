@@ -5,7 +5,8 @@ slug: "ptt-hiking-jiaminglake-2026"
 date: 2026-05-28
 type: insight
 summary: "AI 與分身產線自動產出（content-engine）"
-draft: false
+draft: true
+removed_reason: "factcheck 不合格（嘉明湖誤標台灣第二高峰）+ 簡體字殘留，2026-06-02 下架"
 ---
 
 # 探秘嘉明湖：四天三夜高海拔挑戰與高山症防範實戰攻略
